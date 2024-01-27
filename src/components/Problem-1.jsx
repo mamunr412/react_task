@@ -39,7 +39,12 @@ const Problem1 = () => {
 
   useEffect(() => {
     if (show === "all") {
-      setFilterData(data);
+      const statusOrder = { active: 1, completed: 2, pending: 3, archive: 4 };
+      const sortedTasks = data.sort(
+        (a, b) => statusOrder[a.status] - statusOrder[b.status]
+      );
+
+      setFilterData(sortedTasks);
     } else {
       setFilterData(data?.filter((item) => item.status.toLowerCase() === show));
     }
